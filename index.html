@@ -3,115 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برنامج حفل الزفاف</title>
+    <title>موقعي الشخصي</title>
     <style>
-        /* تنسيقات عامة لتجعل الصفحة أنيقة */
+        /* إعدادات عامة */
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --white: #ffffff;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fdfbf7; /* لون خلفية كريمي فاتح */
-            color: #4a4a4a;
             margin: 0;
             padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* القائمة العلوية */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            margin-right: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* القسم الرئيسي */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
+            padding: 0 20px;
         }
 
-        /* تنسيق قسم الصورة */
-        .header-container {
-            background-color: #d4af37; /* لون ذهبي */
-            padding: 20px;
-            border-bottom-left-radius: 50% 20%;
-            border-bottom-right-radius: 50% 20%;
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #0f172a;
         }
 
-        .profile-pic {
-            width: 200px;  /* عرض الصورة */
-            height: 200px; /* طول الصورة */
-            object-fit: cover; /* لضمان عدم تمطط الصورة */
-            border-radius: 50%; /* لجعل الصورة دائرية */
-            border: 5px solid white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            margin-top: 10px;
-        }
-
-        /* تنسيق النصوص والجدول */
-        .content {
-            padding: 20px;
+        .hero p {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 2rem;
             max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        /* قسم الخدمات */
+        .features {
+            padding: 80px 20px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
-        h1 {
-            color: #d4af37;
-            font-size: 24px;
-            margin-bottom: 5px;
+        .features h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
         }
 
-        h2 {
-            font-size: 18px;
-            color: #666;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
             margin-top: 0;
         }
 
-        /* تصميم بطاقات الجدول */
-        .timeline-item {
-            background: white;
-            margin: 15px 0;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-right: 4px solid #d4af37;
-            text-align: right;
-        }
-
-        .time {
-            font-weight: bold;
-            color: #d4af37;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .event-name {
-            font-size: 18px;
-            font-weight: bold;
+        /* الفوتر */
+        footer {
+            background-color: #1e293b;
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
-    <div class="header-container">
-        <img src="me.jpg" alt="صورة العريس" class="profile-pic">
-    </div>
+    <header>
+        <nav>
+            <div class="logo">اسمك هنا</div>
+            <div class="nav-links">
+                <a href="#home">الرئيسية</a>
+                <a href="#about">من أنا</a>
+                <a href="#services">خدماتي</a>
+                <a href="#contact">تواصل معي</a>
+            </div>
+        </nav>
+    </header>
 
-    <div class="content">
-        <h1>حفل زفاف محمد</h1>
-        <h2>نرحب بكم في ليلتنا المميزة</h2>
-        <p>📅 الجمعة، 20 فبراير 2026</p>
-
-        <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
-
-        <h3 style="color:#d4af37;">برنامج الحفل</h3>
-
-        <div class="timeline-item">
-            <span class="time">08:00 مساءً</span>
-            <span class="event-name">☕ الاستقبال والقهوة</span>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>مرحباً، أنا [اسمك]</h1>
+            <p>أنا مطور ويب ومصمم شغوف ببناء تجارب رقمية مميزة. أهلاً بك في موقعي الشخصي حيث أشارك أعمالي ومهاراتي.</p>
+            <a href="#contact" class="btn">تواصل معي</a>
         </div>
+    </section>
 
-        <div class="timeline-item">
-            <span class="time">09:30 مساءً</span>
-            <span class="event-name">💍 دخول العريس</span>
+    <section class="features" id="services">
+        <h2>ماذا أقدم؟</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>تطوير المواقع</h3>
+                <p>بناء مواقع سريعة ومتجاوبة باستخدام أحدث التقنيات.</p>
+            </div>
+            <div class="card">
+                <h3>تصميم واجهات</h3>
+                <p>تصميم تجربة مستخدم عصرية وجذابة للزوار.</p>
+            </div>
+            <div class="card">
+                <h3>حلول برمجية</h3>
+                <p>تقديم استشارات وحلول تقنية لمشاكلك البرمجية.</p>
+            </div>
         </div>
+    </section>
 
-        <div class="timeline-item">
-            <span class="time">10:30 مساءً</span>
-            <span class="event-name">🍽️ طعام العشاء</span>
-        </div>
-
-        <div class="timeline-item">
-            <span class="time">12:00 صباحاً</span>
-            <span class="event-name">👋 توديع العريس</span>
-        </div>
-
-    </div>
+    <footer id="contact">
+        <p>جميع الحقوق محفوظة © 2026</p>
+    </footer>
 
 </body>
 </html>
