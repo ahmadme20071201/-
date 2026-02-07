@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامج حفل الزفاف</title>
+    <style>
+        /* تنسيقات عامة لتجعل الصفحة أنيقة */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fdfbf7; /* لون خلفية كريمي فاتح */
+            color: #4a4a4a;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* تنسيق قسم الصورة */
+        .header-container {
+            background-color: #d4af37; /* لون ذهبي */
+            padding: 20px;
+            border-bottom-left-radius: 50% 20%;
+            border-bottom-right-radius: 50% 20%;
+        }
+
+        .profile-pic {
+            width: 200px;  /* عرض الصورة */
+            height: 200px; /* طول الصورة */
+            object-fit: cover; /* لضمان عدم تمطط الصورة */
+            border-radius: 50%; /* لجعل الصورة دائرية */
+            border: 5px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+
+        /* تنسيق النصوص والجدول */
+        .content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #d4af37;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #666;
+            margin-top: 0;
+        }
+
+        /* تصميم بطاقات الجدول */
+        .timeline-item {
+            background: white;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-right: 4px solid #d4af37;
+            text-align: right;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #d4af37;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .event-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <img src="me.jpg" alt="صورة العريس" class="profile-pic">
+    </div>
+
+    <div class="content">
+        <h1>حفل زفاف محمد</h1>
+        <h2>نرحب بكم في ليلتنا المميزة</h2>
+        <p>📅 الجمعة، 20 فبراير 2026</p>
+
+        <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
+
+        <h3 style="color:#d4af37;">برنامج الحفل</h3>
+
+        <div class="timeline-item">
+            <span class="time">08:00 مساءً</span>
+            <span class="event-name">☕ الاستقبال والقهوة</span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="time">09:30 مساءً</span>
+            <span class="event-name">💍 دخول العريس</span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="time">10:30 مساءً</span>
+            <span class="event-name">🍽️ طعام العشاء</span>
+        </div>
+
+        <div class="timeline-item">
+            <span class="time">12:00 صباحاً</span>
+            <span class="event-name">👋 توديع العريس</span>
+        </div>
+
+    </div>
+
+</body>
+</html>
