@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تخيلنا معاً | AI Couple Generator</title>
     <style>
+        /* التصميم والألوان */
         :root {
-            --bg-color: #1a1a2e;
-            --card-color: #16213e;
-            --accent-color: #e94560;
-            --text-color: #ffffff;
+            --bg-color: #0f172a;
+            --card-color: #1e293b;
+            --accent-color: #ec4899; /* لون وردي */
+            --text-color: #f8fafc;
         }
 
         body {
@@ -21,192 +22,122 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
 
         .container {
             background-color: var(--card-color);
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             width: 100%;
             max-width: 500px;
             text-align: center;
+            border: 1px solid #334155;
         }
 
         h1 {
             color: var(--accent-color);
-            margin-bottom: 30px;
-            font-size: 24px;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        p {
+            color: #94a3b8;
+            margin-bottom: 40px;
         }
 
         .upload-section {
             display: flex;
-            justify-content: space-around;
-            margin-bottom: 30px;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            align-items: center;
         }
 
         .upload-box {
-            width: 120px;
-            height: 120px;
-            border: 2px dashed #4a5568;
-            border-radius: 10px;
+            width: 130px;
+            height: 160px;
+            border: 2px dashed #475569;
+            border-radius: 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            background: #0f172a;
             overflow: hidden;
         }
 
         .upload-box:hover {
             border-color: var(--accent-color);
+            transform: translateY(-5px);
         }
 
         .upload-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none; /* مخفي حتى يتم الرفع */
-        }
-
-        .upload-label {
-            font-size: 14px;
-            color: #a0aec0;
-            pointer-events: none;
-        }
-
-        /* إخفاء زر الرفع الافتراضي */
-        input[type="file"] {
             display: none;
+            border-radius: 13px;
+        }
+
+        .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .plus {
+            font-size: 30px;
+            color: #64748b;
         }
 
         .action-btn {
-            background-color: var(--accent-color);
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 18px 40px;
             font-size: 18px;
             border-radius: 50px;
             cursor: pointer;
             width: 100%;
             font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+            transition: transform 0.2s;
         }
 
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        .action-btn:active {
+            transform: scale(0.98);
         }
 
+        /* تأثير التحميل */
+        .loading {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* منطقة النتيجة */
         .result-area {
+            display: none;
             margin-top: 30px;
-            display: none; /* مخفي حتى تظهر النتيجة */
+            animation: fadeIn 1s;
         }
 
         .result-area img {
-            width: 100%;
-            border-radius: 10px;
-            border: 3px solid var(--accent-color);
-        }
-        
-        .loading {
-            display: none;
-            color: #a0aec0;
-            margin-top: 20px;
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h1>✨ صانع الذكريات بالذكاء الاصطناعي ✨</h1>
-        <p style="color: #a0aec0; font-size: 14px; margin-bottom: 30px;">
-            ارفعي صورتك وصورة زوجك، ودعي الذكاء الاصطناعي يرسمكما معاً.
-        </p>
-
-        <form id="uploadForm">
-            <div class="upload-section">
-                <div class="upload-box" onclick="document.getElementById('userFile').click()">
-                    <span class="upload-label">صورتك 👩</span>
-                    <img id="previewUser" alt="Preview">
-                    <input type="file" id="userFile" name="user_image" accept="image/*" onchange="previewImage(this, 'previewUser')" required>
-                </div>
-
-                <div style="align-self: center; font-size: 24px;">+</div>
-
-                <div class="upload-box" onclick="document.getElementById('husbandFile').click()">
-                    <span class="upload-label">صورة الزوج 👨</span>
-                    <img id="previewHusband" alt="Preview">
-                    <input type="file" id="husbandFile" name="husband_image" accept="image/*" onchange="previewImage(this, 'previewHusband')" required>
-                </div>
-            </div>
-
-            <button type="submit" class="action-btn">❤️ تخيلنا معاً</button>
-        </form>
-
-        <div class="loading" id="loadingText">جاري الرسم... يرجى الانتظار ⏳</div>
-
-        <div class="result-area" id="resultArea">
-            <h3>النتيجة:</h3>
-            <img id="finalImage" src="" alt="AI Result">
-            <br><br>
-            <a id="downloadLink" href="#" download class="action-btn" style="padding: 10px 20px; font-size: 14px; text-decoration: none;">تحميل الصورة</a>
-        </div>
-    </div>
-
-    <script>
-        // دالة لعرض الصورة المصغرة عند الاختيار
-        function previewImage(input, imgId) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var img = document.getElementById(imgId);
-                    img.src = e.target.result;
-                    img.style.display = 'block';
-                    // إخفاء النص
-                    img.previousElementSibling.style.display = 'none';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // دالة إرسال الصور للخادم (Python)
-        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const loading = document.getElementById('loadingText');
-            const resultArea = document.getElementById('resultArea');
-            
-            loading.style.display = 'block';
-            resultArea.style.display = 'none';
-
-            try {
-                // ملاحظة: هنا يفترض أن الخادم يعمل على هذا الرابط
-                const response = await fetch('/generate-kiss', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const data = await response.json();
-
-                if (data.image_url) {
-                    document.getElementById('finalImage').src = data.image_url;
-                    document.getElementById('downloadLink').href = data.image_url;
-                    resultArea.style.display = 'block';
-                } else {
-                    alert('حدث خطأ: ' + (data.error || 'فشل التوليد'));
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('تأكد من تشغيل ملف Python (الخادم) أولاً!');
-            } finally {
-                loading.style.display = 'none';
-            }
-        });
-    </script>
-</body>
-</html>
